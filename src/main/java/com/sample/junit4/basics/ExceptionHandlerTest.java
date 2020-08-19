@@ -17,6 +17,7 @@ public class ExceptionHandlerTest {
 	@Test(expected = ArithmeticException.class)
 	public void testMethod2() {
 		int i = 1 / 0;
+		System.out.println("Using @Test(expected) ,it will check for specified exception during its execution");
 		System.out.println(i);
 	}
 
@@ -26,4 +27,5 @@ public class ExceptionHandlerTest {
 	public void testMethod3() {
 		System.out.println("running testMethod3");
 	}
+		
 }
