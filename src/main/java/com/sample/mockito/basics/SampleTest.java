@@ -29,14 +29,4 @@ public class SampleTest {
 		assertEquals(i, 0);
 	}
 
-	// Subbing is defining of what values to return when we invoke methods of a mock
-	// object.
-	// Stubbing is achieved by Mockito's when-thenReturn methods.
-	@Test
-	public void testDoSomething2() {
-		ServiceClass mock = Mockito.mock(ServiceClass.class);
-		Mockito.when(mock.doSomething()).thenReturn(10);// stubbing
-		int i = mock.doSomething();
-		assertEquals(i, 10);
-	}
 }
