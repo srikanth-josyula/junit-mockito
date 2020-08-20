@@ -1,4 +1,4 @@
-package com.sample.junit4.basics;
+package com.sample.junit4.exceptions;
 
 import static org.junit.Assert.*;
 

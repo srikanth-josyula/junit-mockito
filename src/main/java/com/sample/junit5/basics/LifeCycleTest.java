@@ -1,13 +1,23 @@
 package com.sample.junit5.basics;
 
-import org.junit.Test;
+/**
+ * JUnit 5 is composed of several different modules:
+ * JUnit Platform: It is JUnit core which allows test execution.
+ * JUnit Jupiter: JUnit 5 API (new) and a combination of new programming model and extension model for writing tests.
+ * JUnit Vintage: It provides a TestEngine which bridges JUnit 3/JUnit 4 tests to JUnit 5 platform. This means previous versions of JUnit can coexist with JUnit 5.
+ * 
+ **/
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
+@RunWith(JUnitPlatform.class)
 public class LifeCycleTest {
-	
+
 	@BeforeAll
 	public static void setup() {
 		System.out.println("@BeforeAll executed");
