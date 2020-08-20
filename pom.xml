@@ -38,6 +38,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- MOCKITO Dependencies -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.3.3</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
 		<dependency>
