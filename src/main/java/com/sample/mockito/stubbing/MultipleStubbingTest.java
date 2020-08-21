@@ -9,27 +9,32 @@ package com.sample.mockito.stubbing;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Iterator;
+import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+@SuppressWarnings("unchecked")
 public class MultipleStubbingTest {
 
-	public String doSomething() {
-		return "Hello World";
+	static List<String> mockList = null;
+
+	@BeforeClass
+	public static void init() {
+		mockList = Mockito.mock(List.class);
 	}
 
 	// CASE - 1 Comma seperated return
 	@Test
 	public void processTest() {
 
-		StubbingTest stubMock = Mockito.mock(StubbingTest.class);
-		Mockito.when(stubMock.doSomething()).thenReturn("Hello", "World");
+		Mockito.when(mockList.get(Mockito.anyInt())).thenReturn("Hello", "World");
 
-		String response = stubMock.doSomething();
+		String response = mockList.get(Mockito.anyInt());
 		assertEquals(response, "Hello");
 
-		String response2 = stubMock.doSomething();
+		String response2 = mockList.get(Mockito.anyInt());
 		assertEquals(response2, "World");
 	}
 
@@ -37,34 +42,31 @@ public class MultipleStubbingTest {
 	@Test
 	public void processTest2() {
 
-		StubbingTest stubMock = Mockito.mock(StubbingTest.class);
-		Mockito.when(stubMock.doSomething()).thenReturn("Hello").thenReturn("World");
+		Mockito.when(mockList.get(Mockito.anyInt())).thenReturn("Hello").thenReturn("World");
 
-		String response = stubMock.doSomething();
+		String response = mockList.get(Mockito.anyInt());
 		assertEquals(response, "Hello");
 
-		String response2 = stubMock.doSomething();
+		String response2 = mockList.get(Mockito.anyInt());
 		assertEquals(response2, "World");
 	}
-	
+
 	// CASE - 3 Iterator style stubbing
 	@Test
-    public void processTest3() {
-        @SuppressWarnings("unchecked")
+	public void processTest3() {
 		Iterator<String> iterator = Mockito.mock(Iterator.class);
-        Mockito.when(iterator.hasNext()).thenReturn(true, true, true, false);
+		Mockito.when(iterator.next()).thenReturn("Hello", "World");
 
-        Mockito.when(iterator.next()).thenReturn("Hello", "World");
-        for (int i = 0; iterator.hasNext(); i++) {
-            String next = iterator.next();
-            switch (i) {
-                case 0:
-                    assertEquals(next, "Hello");
-                    break;
-                case 1:
-                    assertEquals(next, "World");
-                    break;
-            }
-        }
-    }
+		for (int i = 0; iterator.hasNext(); i++) {
+			String next = iterator.next();
+			switch (i) {
+			case 0:
+				assertEquals(next, "Hello");
+				break;
+			case 1:
+				assertEquals(next, "World");
+				break;
+			}
+		}
+	}
 }

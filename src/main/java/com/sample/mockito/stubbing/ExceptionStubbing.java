@@ -7,13 +7,15 @@ package com.sample.mockito.stubbing;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import junit.framework.TestCase;
 
 class CustomException extends Exception {
-	
+
 	private static final long serialVersionUID = 1L;
 	private String message;
 
@@ -28,17 +30,17 @@ class CustomException extends Exception {
 
 }
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unchecked")
 public class ExceptionStubbing {
-	
+
 	public String doSomething() {
 		return "Hello World";
 	}
-	
-	public String doSomething2() throws CustomException{
+
+	public String doSomething2() throws CustomException {
 		return "Hello World";
 	}
-	 
+
 	public String doSomething3() {
 		try {
 			return "Hello World";
@@ -50,6 +52,23 @@ public class ExceptionStubbing {
 
 	/***** TESTING ******/
 	// Testing unchecked exception
+
+	@Test
+	public void test1() {
+		List<String> list = Mockito.mock(List.class);
+		Mockito.when(list.size()).thenThrow(new RuntimeException("size() method not supported"));
+		try {
+			int response = list.size();
+			TestCase.fail();
+		} catch (Exception e) {
+			System.out.println("-- runtime exception thrown --");
+			assertTrue(e instanceof RuntimeException);
+			assertEquals(e.getMessage(), "size() method not supported");
+		}
+
+	}
+	
+
 	@Test
 	public void processTest() {
 
@@ -64,14 +83,16 @@ public class ExceptionStubbing {
 			assertEquals(e.getMessage(), "Cannot process");
 		}
 
-		//Note that if we try to throw checked exception in above example i.e.
-		//Mockito.when(myService.doSomething()).thenThrow(new Exception("Cannot process"));
-					
-		/*then we will have following runtime exception:
+		// Note that if we try to throw checked exception in above example i.e.
+		// Mockito.when(myService.doSomething()).thenThrow(new Exception("Cannot
+		// process"));
 
-							org.mockito.exceptions.base.MockitoException: 
-							Checked exception is invalid for this method!
-							Invalid: java.lang.Exception: Cannot process*/
+		/*
+		 * then we will have following runtime exception:
+		 * 
+		 * org.mockito.exceptions.base.MockitoException: Checked exception is invalid
+		 * for this method! Invalid: java.lang.Exception: Cannot process
+		 */
 	}
 
 	// Testing checked exception
@@ -90,19 +111,18 @@ public class ExceptionStubbing {
 		}
 
 	}
-	
-	//Testing handled exception
+
+	// Testing handled exception
 	@Test
 	public void processTest2() {
 		// NOT WORKING
 		ExceptionStubbing stubMock = Mockito.mock(ExceptionStubbing.class);
 		Mockito.when(stubMock.doSomething3()).thenThrow(new Exception("Cannot process"));
-		//String response = stubMock.doSomething2();
-		/*assertEquals(response, "default-value");*/
+		// String response = stubMock.doSomething2();
+		/* assertEquals(response, "default-value"); */
 
 	}
-	
-	
+
 	// Testing unchecked exception using doThrow
 	@Test
 	public void processTest3() {

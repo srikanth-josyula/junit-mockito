@@ -25,8 +25,7 @@ public class SampleTest {
 	@Test
 	public void testDoSomething() {
 		ServiceClass mock = Mockito.mock(ServiceClass.class);
-		int i = mock.doSomething();
-		assertEquals(i, 0);
+		assertEquals(0, mock.doSomething());
 	}
 
 }

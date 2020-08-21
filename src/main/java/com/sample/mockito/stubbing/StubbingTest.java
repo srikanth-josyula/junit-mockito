@@ -22,8 +22,7 @@ public class StubbingTest {
 		StubbingTest stubMock = Mockito.mock(StubbingTest.class);
 		// when(mock.method()).thenReturn(expectedValue);
 		Mockito.when(stubMock.doSomething()).thenReturn("Hello");
-		String response = stubMock.doSomething();
-		assertEquals(response, "Hello");
+		assertEquals(stubMock.doSomething(), "Hello");
 	}
 
 	@Test
