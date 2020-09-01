@@ -2,7 +2,7 @@ package com.sample.mockito.stubbing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMost;
@@ -16,17 +16,18 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+@SuppressWarnings("unchecked")
 public class ListTest {
 
 	List<String> mock = mock(List.class);
 
 	@Test
 	public void letsMockListSize() {
+
 		List<Integer> list = mock(List.class);
 		when(list.size()).thenReturn(10);
 		assertEquals(10, list.size());
@@ -70,17 +71,17 @@ public class ListTest {
 
 	@Test
 	public void returnWithParameters() {
-		when(mock.get(0)).thenReturn("in28Minutes");
-		assertEquals("in28Minutes", mock.get(0));
+		when(mock.get(0)).thenReturn("Hello");
+		assertEquals("Hello", mock.get(0));
 		assertEquals(null, mock.get(1));
 	}
 
 	@Test
 	public void returnWithGenericParameters() {
-		when(mock.get(anyInt())).thenReturn("in28Minutes");
+		when(mock.get(anyInt())).thenReturn("Hello");
 
-		assertEquals("in28Minutes", mock.get(0));
-		assertEquals("in28Minutes", mock.get(1));
+		assertEquals("Hello", mock.get(0));
+		assertEquals("Hello", mock.get(1));
 	}
 
 	@Test

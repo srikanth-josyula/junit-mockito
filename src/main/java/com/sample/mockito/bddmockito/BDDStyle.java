@@ -54,7 +54,7 @@ public class BDDStyle {
 	@Test
 	public void bddverify() {
 		List<String> list = mock(List.class);
-		Mockito.verify(list, Mockito.atMostOnce()).size();
+		Mockito.verify(list, Mockito.atLeastOnce()).size();
 	}
 	
 	// then - should

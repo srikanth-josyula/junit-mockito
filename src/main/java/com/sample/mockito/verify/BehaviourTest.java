@@ -38,7 +38,7 @@ public class BehaviourTest {
 		mockList.add(Mockito.anyString());
 		mockList.size(); // verifying .size() method
 		
-		Mockito.verify(mockList, Mockito.atMostOnce()).size();
+		Mockito.verify(mockList, Mockito.atLeastOnce()).size();
 		Mockito.verify(mockList, Mockito.times(1)).size(); //same as normal verify method
 		Mockito.verify(mockList, Mockito.atLeastOnce()).size(); // must be called at least once
 		Mockito.verify(mockList, Mockito.atMost(2)).size(); // must be called at most 2 times

@@ -27,7 +27,7 @@ public class CalculatorTest {
 
 		Calculator calMock = mock(Calculator.class);
 		when(calMock.add(a, b)).thenReturn(10);
-		verify(calMock, atMostOnce()).add(a, b);
+		verify(calMock, atLeastOnce()).add(a, b);
 
 		int actual = new Calculator().add(a, b);
 		assertEquals(10, actual);
@@ -41,7 +41,7 @@ public class CalculatorTest {
 
 		Calculator calMock = mock(Calculator.class);
 		when(calMock.divide(a, b)).thenReturn(2);
-		verify(calMock, atMostOnce()).add(a, b);
+		verify(calMock, atLeastOnce()).add(a, b);
 
 		int actual = new Calculator().divide(a, b);
 		assertEquals(2, actual);
@@ -56,7 +56,7 @@ public class CalculatorTest {
 		Calculator calMock = mock(Calculator.class);
 		when(calMock.divide(a, b)).thenThrow(new ArithmeticException());
 
-		verify(calMock, atMostOnce()).divide(a, b);
+		verify(calMock, atLeastOnce()).divide(a, b);
 		
 		try {
 			new Calculator().divide(a, b);

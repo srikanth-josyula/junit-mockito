@@ -7,21 +7,22 @@ package com.sample.mockito.arguments;
  * 
  **/
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mockito;
 
 @SuppressWarnings("unchecked")
 public class ArgumentMatcher {
 
 	@Test
 	public void processTestList() {
+		
+		// ArgumentMatcher.anyInt()  these are present in mokito-core 2.25v
 
-		List<String> mocklist = Mockito.mock(List.class);
-		Mockito.when(mocklist.get(ArgumentMatchers.anyInt())).thenReturn("Mockito");
+		List<String> mocklist = mock(List.class);
+		when(mocklist.get(anyInt())).thenReturn("Mockito");
 
 		assertEquals("Mockito", mocklist.get(0));
 		assertEquals("Mockito", mocklist.get(1));
