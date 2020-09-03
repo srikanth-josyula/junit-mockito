@@ -1,4 +1,4 @@
-package com.sample.extras;
+package com.sample.extras.asserj;
 
 /**
  * AssertJ provides a set of classes and utility methods that allow us to write fluent and beautiful assertions
@@ -6,12 +6,9 @@ package com.sample.extras;
  * AssertJ provides a rich set of assertions, truly helpful error messages,
  * improves test code readability and is designed to be super easy to use within your favorite IDE
  * 
- * Provides assertions for Joda Time types like DateTime and LocalDateTime
+ * Provides assertions for Joda Time types like DateTime and LocalDateTime and JAVA8
  **/
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,8 +18,6 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitPlatform.class)
 public class AssertJTestExamples {
 
-	private List<String> list = Arrays.asList("Sri", "Kanth");
-	
 	@Test
 	@DisplayName("Should be true")
 	public void shouldBeTrue() {
@@ -87,32 +82,15 @@ public class AssertJTestExamples {
 	}
 
 	@Test
-	@DisplayName("Should contain two elements")
-	void shouldContainTwoElements() {
-		assertThat(list).hasSize(2);
+	@DisplayName("Provide a custom error message Should override only the description")
+	void shouldBeFalseWithCustomErrorMessage() {
+		assertThat(false).describedAs("The boolean is not false").isFalse();
 	}
-	
+
 	@Test
-    @DisplayName("Should contain the correct elements in the given order")
-    void shouldContainCorrectElementsInGivenOrder() {
-        assertThat(list).containsExactly("Sri", "Kanth");
-    }
-	
-	@Test
-    @DisplayName("Should contain the correct elements in any order")
-    void shouldContainCorrectElementsInAnyOrder() {
-        assertThat(list).containsExactlyInAnyOrder("Kanth", "Sri");
-    }
-	
-	@Test
-    @DisplayName("Should contain the correct element once")
-    void shouldContainCorrectElementOnce() {
-        assertThat(list).containsOnlyOnce("Sri");
-    }
-	
-	 @Test
-     @DisplayName("Should not contain an incorrect element")
-     void shouldNotContainIncorrectElement() {
-         assertThat(list).doesNotContain(new String());
-     }
+	@DisplayName("Should override entire error message")
+	void shouldBeFalseWithCustomErrorMessage2() {
+		assertThat(false).overridingErrorMessage("The boolean is not false").isFalse();
+	}
+
 }
